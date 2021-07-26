@@ -1,5 +1,5 @@
 <?php
-    session_start();
+    //session_start();
 
     echo <<<_INIT
     <!DOCTYPE html>
@@ -34,7 +34,7 @@
         <body>
             <div data-role='page'>
                 <div data-role='header'>
-                    <div id='logo' class='center'>R<img id='robin' src='robin.gif>bin's Nest</div>
+                    <div id='logo' class='center'>Robin's Nest</div>
                     <div class='username'>$userstr</div>
                 </div>
                 <div data-role='content'>

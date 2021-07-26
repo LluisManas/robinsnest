@@ -1,11 +1,16 @@
 <?php
 
 $dbhost = 'localhost';
-$dbname = 'robinsnest';
-$dbuser = 'robinsnest';
+$dbuser = 'root';
 $dbpass = '';
+$dbname = 'robinsnest';
+//define('HOST', 'localhost');
+//define('USER', 'root');
+//define('DB', 'robinsnest');
+//define('PASS', 'secret');
 
-$connection = new msqli($dbhost, $dbname, $dbuser, $dbpass);
+
+$connection = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
 if ($connection->connect_error) die('Fatal Error');
 
 
