@@ -4,11 +4,6 @@ $dbhost = 'localhost';
 $dbuser = 'root';
 $dbpass = '';
 $dbname = 'robinsnest';
-//define('HOST', 'localhost');
-//define('USER', 'root');
-//define('DB', 'robinsnest');
-//define('PASS', 'secret');
-
 
 $connection = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
 if ($connection->connect_error) die('Fatal Error');
@@ -16,15 +11,16 @@ if ($connection->connect_error) die('Fatal Error');
 
 function createTable($name, $query)
 {
-    queryMysql("CREATE TABLE IF NOT EXISTS $name($query)");
+    queryMysql("CREATE TABLE IF NOT EXISTS $name ($query);");
     echo "Table '$name' created or already exists.<br>";
 }
 
-function queryMsql($query)
+function queryMysql($query)
 {
     global $connection;
     $result = $connection->query($query);
-    if (!$result) die ("Fatal Error");
+    
+    if (!$result) die ("Fatal Error in DB");
     return $result;
 }
 
@@ -38,7 +34,7 @@ function destroySession()
     session_destroy();
 }
 
-function sanitaizeString()
+function sanitaizeString($var)
 {
     global $connection;
     $var = strip_tags($var); //remove all php & HTML tags
@@ -56,7 +52,7 @@ function  showProfileUser($user)
         echo "<img src='$user.jpg' style='float:left;'>";
     }
 
-    $result = mysqlQuery("SELECT * FROM profiles WHERE user='$user'");
+    $result = queryMysql("SELECT * FROM profiles WHERE user='$user'");
 
     if ($result->num_rows) {
         $row = $result->fetch_array(MYSQLI_ASSOC);
